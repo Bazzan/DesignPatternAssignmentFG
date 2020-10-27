@@ -7,6 +7,10 @@ public class GameBaseState : GameState
     public override void Initialize(GameStateMachine owner)
     {
         this.Owner = (GameManager)owner;
+
+        //Owner.SphereCommandInvoker = new CommandInvoker();
+        //Owner.CubeCommandInvoker = new CommandInvoker();
+        //Owner.CapsuleCommandInvoker = new CommandInvoker();
     }
     public override void Enter()
     {

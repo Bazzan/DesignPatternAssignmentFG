@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-[CreateAssetMenu(menuName ="GameManager/GameAttackState")]
+[CreateAssetMenu(menuName = "GameManager/GameAttackState")]
 public class GameAttackState : GameBaseState
 {
 
@@ -8,20 +8,23 @@ public class GameAttackState : GameBaseState
     {
         time = 0;
         base.PrintCurrentGameSate();
-        MoveHerosToTarget();
+        //MoveHerosToTarget();
     }
     public override void Exit()
     {
         base.Exit();
         MoveHerosToCachedPosition();
-        Owner.numberOfCommands = 0;
+        //Owner.numberOfCommands = 0;
     }
-    public void MoveHerosToTarget()
-    {
-        Owner.CubeHero.transform.position = Owner.Target.transform.position + Owner.Target.transform.forward;
-        Owner.CapsuleHero.transform.position = Owner.Target.transform.position + Owner.Target.transform.forward;
-        Owner.SphereHero.transform.position = Owner.Target.transform.position + Owner.Target.transform.forward;
-    }
+    //public void MoveHerosToTarget()
+    //{
+    //    if (Owner.CapsuleCommandInvoker.commandBuffer.Count > 0)
+    //        Owner.CapsuleHero.transform.position = new Vector3(Owner.CapsuleHero.transform.position.x, Owner.CapsuleHero.transform.position.y, Owner.attackPosition.position.z);
+    //    if (Owner.SphereCommandInvoker.commandBuffer.Count > 0)
+    //        Owner.SphereHero.transform.position = new Vector3(Owner.SphereHero.transform.position.x, Owner.SphereHero.transform.position.y, Owner.attackPosition.position.z);
+    //    if (Owner.CubeCommandInvoker.commandBuffer.Count > 0)
+    //        Owner.CubeHero.transform.position = new Vector3(Owner.CubeHero.transform.position.x, Owner.CubeHero.transform.position.y, Owner.attackPosition.position.z);
+    //}
 
     public void MoveHerosToCachedPosition()
     {
@@ -31,7 +34,7 @@ public class GameAttackState : GameBaseState
     }
     public override void HandleUpdate()
     {
-        while(time < 1f)
+        while (time < 1f)
         {
             time += Time.deltaTime;
             return;

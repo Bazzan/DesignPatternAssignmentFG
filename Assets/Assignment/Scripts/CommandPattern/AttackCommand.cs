@@ -6,8 +6,6 @@ public class AttackCommand : Command
     private float damage;
     private GameObject character;
     private GameObject target;
-    private float timeToGoBack = 2.5f;
-    private CommandManager monoCommand = new CommandManager();
     private Vector3 cachedPos;
 
     public AttackCommand(GameObject character , GameObject target, float damage )
