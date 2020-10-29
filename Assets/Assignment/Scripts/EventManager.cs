@@ -1,16 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EventManager : MonoBehaviour
+public abstract class EventManager : MonoBehaviour
 {
-    //public delegate void OnTakingDamageDelegate();
-    //public static event OnTakingDamageDelegate OnTakingDamage;
+    /// <summary>
+    /// class that is supposed to manage and hold diffrent events in this case 
+    /// OnTakingDamge. Which is only updating the enemys healthbar;
+    /// </summary>
+
+    public delegate void OnTakingDamageDelegete();
+    public static event OnTakingDamageDelegete OnTakingDamage;
+
+    public static void FireOnTakingDamage()
+    {
+        OnTakingDamage();
+    }
 
 
-
-
-    //public static void FireOnTakingDamage()
-    //{
-    //    OnTakingDamage();
-    //}
 }
+

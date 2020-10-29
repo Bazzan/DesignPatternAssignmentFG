@@ -1,67 +1,48 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHelth : MonoBehaviour , IDamagable
+public class EnemyHelth : MonoBehaviour
 {
+    /// <summary>
+    /// 
+    /// Adds UpdateHealth() to the event when the object is enabled.
+    /// it updates enemyHealth in TakeDamage(float damage) and fires OnTakingDamage in eventmanager
+    /// 
+    /// </summary>
 
-    public delegate void OnTakeDamageDelegate(float damage);
-    public static event OnTakeDamageDelegate onTakingDamage;
-
-    public Slider slider;
     public float enemyHealth;
-    public Material material;
+    public Slider HealthBar;
 
-
+    ///
     private void OnEnable()
     {
-        onTakingDamage += TakeDamage;
-        onTakingDamage += UpdateHealthBar;
-        onTakingDamage += StartHitVFX;
+        EventManager.OnTakingDamage += UpdateHealthBar;
     }
-
-    private void Start()
+    private void OnDisable()
     {
-        slider.value = enemyHealth;
+        EventManager.OnTakingDamage -= UpdateHealthBar;
     }
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;
-        if(enemyHealth< 0f)
+        EventManager.FireOnTakingDamage();
+        if (enemyHealth < 0f)
         {
             Die();
         }
-
     }
-
-    public void UpdateHealthBar(float health)
-    {
-        slider.value = enemyHealth;
-    }
-
     private void Die()
     {
         gameObject.SetActive(false);
     }
-
-    public void FireTakeDamageEvent(float damage)
+    private void UpdateHealthBar()
     {
-        onTakingDamage(damage);
+        HealthBar.value = enemyHealth;
     }
 
-    public void StartHitVFX(float secs)
-    {
-        StartCoroutine(HitVFX(0.25f));
-    }
 
-    public IEnumerator HitVFX(float seconds)
-    {
-        Color color = material.color;
-        material.color = Color.red;
-        yield return new WaitForSeconds(seconds);
-        material.color = color;
-    }
+
+
 
 
 }
